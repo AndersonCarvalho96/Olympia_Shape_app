@@ -97,7 +97,7 @@ Dashboard para personal trainer acompanhar os treinos dos alunos
 
 ## 👨‍💻 Desenvolvedor
 
-Anderson Carvalho
+Anderson Carvalho - 
 Desenvolvedor de Sistemas • Flutter | Python | Power Platform
 📍 Rio de Janeiro, Brasil
 🔗 GitHub - AndersonCarvalho96
