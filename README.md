@@ -50,27 +50,25 @@ Aplicativo de gerenciamento de treinos e dietas, voltado para usuários que dese
 1. Clone este repositório:  
 ```bash
 git clone https://github.com/AndersonCarvalho96/olympia-shape.git
-Abra o projeto no VSCode ou Android Studio.
 ```
-2. Execute o comando:
+Abra o projeto no VSCode ou Android Studio.
 
+2. Execute o comando:
 ```bash
 flutter pub get
-
 ```
 
 Rode o app com:
 
 ```bash
 flutter run
-
 ```
-##📦 Instalador (APK)
+## 📦 Instalador (APK)
 
 Se você não quiser rodar o código, os APKs já compilados estão disponíveis na pasta /apk.
 Basta baixar a versão desejada e instalar no seu dispositivo Android.
 
-###📲 APKs disponíveis:
+### 📲 APKs disponíveis:
 
 v1.0 – Funcionalidade inicial de treinos.
 
@@ -83,7 +81,7 @@ v2.1.1 (Final) – Ajustes de campos, correções e estabilidade.
 ⚠️ Antes de instalar, verifique se o dispositivo permite a instalação de apps de fontes externas.
 Arquivos .apk são destinados apenas a Android (não compatíveis com iOS).
 
-##🧾 Licença e Uso
+## 🧾 Licença e Uso
 
 © 2025 Anderson Carvalho. Todos os direitos reservados.
 Este código está disponível apenas para fins de estudo/portfólio.
@@ -97,7 +95,7 @@ Sistema de login e perfis de usuário/admin
 
 Dashboard para personal trainer acompanhar os treinos dos alunos
 
-##👨‍💻 Desenvolvedor
+## 👨‍💻 Desenvolvedor
 
 Anderson Carvalho
 Desenvolvedor de Sistemas • Flutter | Python | Power Platform
