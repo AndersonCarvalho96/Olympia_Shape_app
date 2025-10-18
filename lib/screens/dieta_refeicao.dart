@@ -33,9 +33,18 @@ class _DietaRefeicaoCardState extends State<DietaRefeicaoCard> {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            TextField(controller: itemController, decoration: const InputDecoration(labelText: 'Item')),
-            TextField(controller: qtdController, decoration: const InputDecoration(labelText: 'Quantidade')),
-            TextField(controller: gController, decoration: const InputDecoration(labelText: 'Gramas')),
+            TextField(
+              controller: itemController,
+              decoration: const InputDecoration(labelText: 'Item'),
+            ),
+            TextField(
+              controller: qtdController,
+              decoration: const InputDecoration(labelText: 'Quantidade'),
+            ),
+            TextField(
+              controller: gController,
+              decoration: const InputDecoration(labelText: 'Gramas'),
+            ),
           ],
         ),
         actions: [
@@ -43,11 +52,13 @@ class _DietaRefeicaoCardState extends State<DietaRefeicaoCard> {
             onPressed: () {
               if (itemController.text.isEmpty) return;
               setState(() {
-                widget.refeicao.itens.add(ItemAlimento(
-                  nome: itemController.text,
-                  quantidade: qtdController.text,
-                  gramas: gController.text,
-                ));
+                widget.refeicao.itens.add(
+                  ItemAlimento(
+                    nome: itemController.text,
+                    quantidade: qtdController.text,
+                    gramas: gController.text,
+                  ),
+                );
               });
               widget.atualizarRefeicao(widget.refeicao);
               Navigator.pop(context);
@@ -65,7 +76,10 @@ class _DietaRefeicaoCardState extends State<DietaRefeicaoCard> {
       context: context,
       builder: (_) => AlertDialog(
         title: const Text('Editar Refeição'),
-        content: TextField(controller: nomeController, decoration: const InputDecoration(labelText: 'Nome da Refeição')),
+        content: TextField(
+          controller: nomeController,
+          decoration: const InputDecoration(labelText: 'Nome da Refeição'),
+        ),
         actions: [
           ElevatedButton(
             onPressed: () {
@@ -83,9 +97,15 @@ class _DietaRefeicaoCardState extends State<DietaRefeicaoCard> {
   }
 
   void editarItem(ItemAlimento item) {
-    TextEditingController itemController = TextEditingController(text: item.nome);
-    TextEditingController qtdController = TextEditingController(text: item.quantidade);
-    TextEditingController gController = TextEditingController(text: item.gramas);
+    TextEditingController itemController = TextEditingController(
+      text: item.nome,
+    );
+    TextEditingController qtdController = TextEditingController(
+      text: item.quantidade,
+    );
+    TextEditingController gController = TextEditingController(
+      text: item.gramas,
+    );
 
     showDialog(
       context: context,
@@ -94,9 +114,18 @@ class _DietaRefeicaoCardState extends State<DietaRefeicaoCard> {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            TextField(controller: itemController, decoration: const InputDecoration(labelText: 'Item')),
-            TextField(controller: qtdController, decoration: const InputDecoration(labelText: 'Quantidade')),
-            TextField(controller: gController, decoration: const InputDecoration(labelText: 'Gramas')),
+            TextField(
+              controller: itemController,
+              decoration: const InputDecoration(labelText: 'Item'),
+            ),
+            TextField(
+              controller: qtdController,
+              decoration: const InputDecoration(labelText: 'Quantidade'),
+            ),
+            TextField(
+              controller: gController,
+              decoration: const InputDecoration(labelText: 'Gramas'),
+            ),
           ],
         ),
         actions: [
@@ -124,6 +153,31 @@ class _DietaRefeicaoCardState extends State<DietaRefeicaoCard> {
     widget.atualizarRefeicao(widget.refeicao);
   }
 
+  void confirmarExclusaoItem(int index) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Confirmação'),
+        content: const Text('Tem certeza que deseja excluir este item?'),
+        actions: [
+          // Cancelar
+          IconButton(
+            icon: const Icon(Icons.close, color: Colors.red),
+            onPressed: () => Navigator.pop(context),
+          ),
+          // Confirmar
+          IconButton(
+            icon: const Icon(Icons.check, color: Colors.green),
+            onPressed: () {
+              excluirItem(index); // Executa a exclusão
+              Navigator.pop(context); // Fecha o diálogo
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -137,11 +191,23 @@ class _DietaRefeicaoCardState extends State<DietaRefeicaoCard> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(widget.refeicao.nome, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                Text(
+                  widget.refeicao.nome,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 Row(
                   children: [
-                    IconButton(icon: const Icon(Icons.edit, color: Colors.redAccent), onPressed: editarRefeicao),
-                    IconButton(icon: const Icon(Icons.delete, color: Colors.redAccent), onPressed: widget.excluirRefeicao),
+                    IconButton(
+                      icon: const Icon(Icons.edit, color: Colors.redAccent),
+                      onPressed: editarRefeicao,
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.delete, color: Colors.redAccent),
+                      onPressed: widget.excluirRefeicao,
+                    ),
                   ],
                 ),
               ],
@@ -150,16 +216,28 @@ class _DietaRefeicaoCardState extends State<DietaRefeicaoCard> {
             ...widget.refeicao.itens.asMap().entries.map((entry) {
               int index = entry.key;
               ItemAlimento item = entry.value;
-              String quantidade = item.quantidade.isEmpty ? '' : '${item.quantidade} ';
+              String quantidade = item.quantidade.isEmpty
+                  ? ''
+                  : '${item.quantidade} ';
               String gramas = item.gramas.isEmpty ? '' : '${item.gramas}g';
-              String text = [quantidade, gramas, item.nome].where((s) => s.isNotEmpty).join(' ');
+              String text = [
+                quantidade,
+                gramas,
+                item.nome,
+              ].where((s) => s.isNotEmpty).join(' ');
               return ListTile(
                 title: Text(text, style: const TextStyle(color: Colors.white)),
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    IconButton(icon: const Icon(Icons.edit, color: Colors.redAccent), onPressed: () => editarItem(item)),
-                    IconButton(icon: const Icon(Icons.delete, color: Colors.redAccent), onPressed: () => excluirItem(index)),
+                    IconButton(
+                      icon: const Icon(Icons.edit, color: Colors.redAccent),
+                      onPressed: () => editarItem(item),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.delete, color: Colors.redAccent),
+                      onPressed: () => confirmarExclusaoItem(index),
+                    ),
                   ],
                 ),
               );
@@ -168,7 +246,9 @@ class _DietaRefeicaoCardState extends State<DietaRefeicaoCard> {
               child: ElevatedButton.icon(
                 icon: const Icon(Icons.add),
                 label: const Text('Adicionar Item'),
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.redAccent),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.redAccent,
+                ),
                 onPressed: adicionarItem,
               ),
             ),

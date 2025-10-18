@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'home.dart'; // importar a nova tela inicial
+import 'home.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -15,9 +15,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(const Duration(seconds: 2), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(
-          builder: (_) => const HomePage(),
-        ), // alterado para HomePage
+        MaterialPageRoute(builder: (_) => const HomePage()),
       );
     });
   }

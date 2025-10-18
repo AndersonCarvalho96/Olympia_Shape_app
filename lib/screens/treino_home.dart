@@ -140,6 +140,29 @@ class _TreinoHomeState extends State<TreinoHome> {
     _saveTreinos();
   }
 
+  void confirmarExclusaoTreino(int index) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Confirmação'),
+        content: const Text('Tem certeza que deseja excluir este treino?'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.close, color: Colors.red),
+            onPressed: () => Navigator.pop(context), // Cancela
+          ),
+          IconButton(
+            icon: const Icon(Icons.check, color: Colors.green),
+            onPressed: () {
+              excluirTreino(index); // Executa a exclusão
+              Navigator.pop(context); // Fecha o diálogo
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
   void atualizarTreino(Treino treino, int index) {
     setState(() {
       treinos[index] = treino;
@@ -319,7 +342,7 @@ class _TreinoHomeState extends State<TreinoHome> {
                                   Icons.delete,
                                   color: Colors.redAccent,
                                 ),
-                                onPressed: () => excluirTreino(index),
+                                onPressed: () => confirmarExclusaoTreino(index),
                               ),
                             ],
                           ),
@@ -343,7 +366,7 @@ class _TreinoHomeState extends State<TreinoHome> {
           ),
           // Botão flutuante para voltar
           Positioned(
-            bottom: 20,
+            top: 20,
             left: 20,
             child: GestureDetector(
               onTap: () {

@@ -47,16 +47,18 @@ class _DietaHomeState extends State<DietaHome> {
     List<String>? refeicoesJson = prefs.getStringList('refeicoes');
     if (refeicoesJson != null) {
       setState(() {
-        refeicoes =
-            refeicoesJson.map((r) => Refeicao.fromJson(jsonDecode(r))).toList();
+        refeicoes = refeicoesJson
+            .map((r) => Refeicao.fromJson(jsonDecode(r)))
+            .toList();
       });
     }
   }
 
   Future<void> _saveRefeicoes() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> refeicoesJson =
-        refeicoes.map((r) => jsonEncode(r.toJson())).toList();
+    List<String> refeicoesJson = refeicoes
+        .map((r) => jsonEncode(r.toJson()))
+        .toList();
     await prefs.setStringList('refeicoes', refeicoesJson);
   }
 
@@ -120,6 +122,31 @@ class _DietaHomeState extends State<DietaHome> {
       refeicoes.removeAt(index);
     });
     _saveRefeicoes();
+  }
+
+  void confirmarExclusaoRefeicao(int index) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Confirmação'),
+        content: const Text('Tem certeza que deseja excluir esta refeição?'),
+        actions: [
+          // Cancelar
+          IconButton(
+            icon: const Icon(Icons.close, color: Colors.red),
+            onPressed: () => Navigator.pop(context),
+          ),
+          // Confirmar
+          IconButton(
+            icon: const Icon(Icons.check, color: Colors.green),
+            onPressed: () {
+              excluirRefeicao(index); // Executa a exclusão
+              Navigator.pop(context); // Fecha o diálogo
+            },
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -234,7 +261,7 @@ class _DietaHomeState extends State<DietaHome> {
                       return DietaRefeicaoCard(
                         refeicao: refeicao,
                         atualizarRefeicao: (r) => atualizarRefeicao(r, index),
-                        excluirRefeicao: () => excluirRefeicao(index),
+                        excluirRefeicao: () => confirmarExclusaoRefeicao(index),
                       );
                     },
                   ),
@@ -244,7 +271,7 @@ class _DietaHomeState extends State<DietaHome> {
           ),
           // ================= Botão flutuante voltar =================
           Positioned(
-            bottom: 20,
+            top: 20,
             left: 20,
             child: GestureDetector(
               onTap: () {

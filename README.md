@@ -42,7 +42,7 @@ Aplicativo de gerenciamento de treinos e dietas, voltado para usuários que dese
 | 2.0    | Implementação da funcionalidade de dieta e nova tela inicial. |
 | 2.1    | Inclusão de treinos pré-determinados, melhorias de interface e visualização. |
 | 2.1.1  | Bugfix: campo de repetições alterado para texto (“8-10”) + ajustes de layout e estabilidade. |
-
+| 2.1.2  | Confirmação antes de excluir treinos/exercícios/dietas, melhoria na interface, botão de voltar fixo no topo. |
 ---
 
 ## 🧩 Como Rodar o Projeto
@@ -76,7 +76,9 @@ v2.0 – Adição da funcionalidade de dieta e tela inicial.
 
 v2.1 – Treinos pré-determinados e melhorias na interface.
 
-v2.1.1 (Final) – Ajustes de campos, correções e estabilidade.
+v2.1.1 – Ajustes de campos, correções e estabilidade.
+
+v2.1.2 (Final) – Atualizações gerais: confirmação de exclusão, melhorias na interface e botão de voltar fixo no topo.
 
 ⚠️ Antes de instalar, verifique se o dispositivo permite a instalação de apps de fontes externas.
 Arquivos .apk são destinados apenas a Android (não compatíveis com iOS).

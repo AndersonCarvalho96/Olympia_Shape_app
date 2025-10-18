@@ -314,6 +314,29 @@ class _TreinoDetalhePageState extends State<TreinoDetalhePage> {
     widget.atualizarTreino(widget.treino, widget.index);
   }
 
+  void confirmarExclusaoExercicio(int index) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Confirmação'),
+        content: const Text('Tem certeza que deseja excluir este exercício?'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.close, color: Colors.red),
+            onPressed: () => Navigator.pop(context), // Fecha o diálogo
+          ),
+          IconButton(
+            icon: const Icon(Icons.check, color: Colors.green),
+            onPressed: () {
+              excluirExercicio(index); // Chama a função de exclusão
+              Navigator.pop(context); // Fecha o diálogo
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -408,7 +431,8 @@ class _TreinoDetalhePageState extends State<TreinoDetalhePage> {
                                         Icons.delete,
                                         color: Colors.redAccent,
                                       ),
-                                      onPressed: () => excluirExercicio(index),
+                                      onPressed: () =>
+                                          confirmarExclusaoExercicio(index),
                                     ),
                                   ],
                                 ),
